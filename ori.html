@@ -24,6 +24,12 @@
         <header class="main-header">
             <h1 class="glow-text">Ori Interactive</h1>
             <p class="subtitle">Thư viện của Khối Ánh Sáng (The Spirit Tree Library)</p>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Tìm tên truyện hoặc tác giả..." oninput="handleSearch(this.value)">
+            </div>
+
             <button class="add-story-trigger glow-button phosphorescent" onclick="openAddModal()">
                 <i class="fas fa-plus"></i> Thêm truyền mới
             </button>
