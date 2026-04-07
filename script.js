@@ -133,8 +133,29 @@ function saveToStorage() {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(libraryData));
 }
 
-function renderLibrary() {
-  grid.innerHTML = libraryData.map(story => `
+function handleSearch(query) {
+  const searchTerm = query.toLowerCase().trim();
+  const filtered = libraryData.filter(story => 
+    story.title.toLowerCase().includes(searchTerm) || 
+    story.author.toLowerCase().includes(searchTerm)
+  );
+  renderLibrary(filtered);
+}
+
+function renderLibrary(filteredData = null) {
+  const dataToRender = filteredData || libraryData;
+  
+  if (dataToRender.length === 0) {
+    grid.innerHTML = `
+        <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 4rem; opacity: 0.6;">
+            <i class="fas fa-leaf" style="font-size: 3rem; margin-bottom: 1rem; color: var(--emerald);"></i>
+            <p>Khu rừng im lặng... Không tìm thấy câu chuyện bạn yêu cầu.</p>
+        </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = dataToRender.map(story => `
     <div class="story-card">
       <div class="card-img-container" onclick="openReader(${story.id})">
         <img src="${story.image}" alt="${story.title}">
