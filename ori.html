@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ori Interactive Library | Thư viện Ánh sáng</title>
+    <meta name="description" content="Trải nghiệm đọc truyện lấy cảm hứng từ Ori and the Blind Forest với AI Reader.">
+    <!-- Google Fonts: Outfit, Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="ori-theme">
+    <!-- Particle Container -->
+    <div id="particles-container"></div>
+    
+    <!-- Mouse Glow Tracking Layer -->
+    <div id="mouse-glow"></div>
+
+    <div class="app-wrapper">
+        <header class="main-header">
+            <h1 class="glow-text">Ori Interactive</h1>
+            <p class="subtitle">Thư viện của Khối Ánh Sáng (The Spirit Tree Library)</p>
+            <button class="add-story-trigger glow-button phosphorescent" onclick="openAddModal()">
+                <i class="fas fa-plus"></i> Thêm truyền mới
+            </button>
+        </header>
+
+        <main class="library-grid" id="library-grid">
+            <!-- Cards will be injected by script.js -->
+        </main>
+    </div>
+
+    <!-- Modal for Story Reader -->
+    <div id="reader-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeReader()"></div>
+        <div class="modal-content glass">
+            <button class="close-btn" onclick="closeReader()"><i class="fas fa-times"></i></button>
+            
+            <div class="story-header">
+                <div class="header-image" id="modal-image"></div>
+                <div class="header-info">
+                    <h2 id="modal-title" class="glow-text"></h2>
+                    <p id="modal-author" class="author-tag"></p>
+                    <p id="modal-desc" class="description"></p>
+                    <button id="start-read-btn" class="glow-button phosphorescent">
+                        <i class="fas fa-play"></i> Bắt đầu đọc bằng AI
+                    </button>
+                </div>
+            </div>
+
+            <div class="reader-view hidden" id="reader-view">
+                <div class="reader-controls">
+                    <div class="progress-bar-container">
+                        <div id="progress-indicator" class="progress-indicator"></div>
+                    </div>
+                </div>
+                <div id="reader-content" class="reader-content">
+                    <!-- Text will go here -->
+                </div>
+                <div class="playback-controls">
+                    <button class="ctrl-btn" id="pause-resume"><i class="fas fa-pause"></i></button>
+                    <div class="speed-control">
+                        <span>1.0x</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Adding New Story -->
+    <div id="add-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeAddModal()"></div>
+        <div class="modal-content glass add-form-modal">
+            <button class="close-btn" onclick="closeAddModal()"><i class="fas fa-times"></i></button>
+            <h2 class="glow-text small" style="font-size: 2rem;">Gieo Hạt Giống Mới</h2>
+            <p class="subtitle" style="margin-bottom: 2rem;">Chia sẻ câu chuyện của bạn với khu rừng</p>
+            
+            <form id="add-story-form" class="story-form">
+                <div class="form-group">
+                    <label>Tiêu đề truyện</label>
+                    <input type="text" id="form-title" placeholder="VD: Vũ Điệu Của Ánh Trăng" required>
+                </div>
+                <div class="form-group">
+                    <label>Tác giả</label>
+                    <input type="text" id="form-author" placeholder="Tên của bạn..." required>
+                </div>
+                <div class="form-group">
+                    <label>Link ảnh nền (URL)</label>
+                    <input type="url" id="form-image" placeholder="https://..." required>
+                </div>
+                <div class="form-group">
+                    <label>Mô tả ngắn</label>
+                    <textarea id="form-desc" rows="2" placeholder="Một vài lời tựa nhẹ nhàng..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung (Phân cách các đoạn bằng dấu xuống dòng)</label>
+                    <textarea id="form-content" rows="6" placeholder="Bắt đầu kể chuyện..." required></textarea>
+                </div>
+                <button type="submit" class="glow-button phosphorescent" style="width: 100%; justify-content: center; margin-top: 1rem;">
+                    <i class="fas fa-leaf"></i> <span>Gửi vào Spirit Tree</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
